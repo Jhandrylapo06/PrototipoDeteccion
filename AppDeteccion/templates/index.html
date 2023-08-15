@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trash Detection</title>
+    <!-- Agrega los enlaces a los archivos de Bootstrap CSS y jQuery -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+   
+</head>
+<body>
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-75 bg-light">
+        <!-- Div para centrar el contenido -->
+        <div class="text-center p-5 border rounded shadow bg-white">
+            <h1 class="mb-4">Detección de Residuos</h1>
+            <p class="lead">El propósito principal de este proyecto es llevar a cabo la detección y clasificación de residuos reciclables utilizando la potencia de la Inteligencia Artificial.</p>
+            <img src="{% static '/img/ejemplo.png' %}" class="img-fluid rounded" alt="Imagen Responsiva">
+            <hr>
+            <p class="lead">Puedes experimentar con este modelo cargando una imagen o capturando una fotografía.</p>
+
+            
+            <form method="post" enctype="multipart/form-data" style="margin-top: 50px; margin-bottom: 30px;">
+                {% csrf_token %}
+                {{ form }}
+                <hr>
+                <button type="submit" id="btnUpload" class="btn btn-primary">Realizar detección</button>
+            </form>
+
+            {% if image_uri is not None %}
+                <div class="alert alert-primary" role="alert">
+                    Detección realizada</b>
+                </div>
+                <img src="{% static '/img/deteccion.jpg' %}" class="img-fluid" alt="ImagenDeteccion"
+                     style="max-width: min(500px, 100%); height: auto; margin-top: 30px;">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
